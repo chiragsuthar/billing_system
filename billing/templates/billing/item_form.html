@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if edit_mode %}Edit Item{% else %}Add Item{% endif %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add custom styles here if needed */
+        body {
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        button[type="submit"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if edit_mode %}Edit Item{% else %}Add Item{% endif %}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.price.label_tag }}
+                {{ form.price }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+            <button type="submit" class="btn btn-primary">{% if edit_mode %}Save Changes{% else %}Save{% endif %}</button>
+            {% if edit_mode %}
+                <a href="{% url 'item_delete' item.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+            {% endif %}
+        </form>
+    </div>
+    <!-- Bootstrap JS (Optional, if you want to use Bootstrap's JavaScript features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

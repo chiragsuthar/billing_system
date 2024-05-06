@@ -1,0 +1,14 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}Delete Item{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Delete Item</h1>
+        <p>Are you sure you want to delete "{{ item.name }}"?</p>
+        <form action="{% url 'item_delete' item.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}

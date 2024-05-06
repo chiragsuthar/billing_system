@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Detail</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS can be added here */
+        /* Optional: Customize your styles */
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bill Detail</h1>
+        <p><strong>Bill Number:</strong> {{ bill.id }}</p>
+        <p><strong>Total Cost:</strong> ${{ bill.total_cost }}</p>
+        <p><strong>Items:</strong></p>
+        <ul class="list-group">
+            {% for item in bill.items.all %}
+                <li class="list-group-item">{{ item.name }} - ${{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <!-- Back Button -->
+        <a href="{% url 'item_list' %}" class="btn btn-secondary">Back</a>
+        <!-- Print Button -->
+        <button class="btn btn-primary" onclick="window.print()">Print</button>
+    </div>
+</body>
+</html>
